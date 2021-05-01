@@ -13,7 +13,7 @@ pip install -r requirements.text
 ```
 
 ## Usage
-Just call the script directly or via python, you will need to specify a key for authentication (use the one present in the link in the email sent to you when you enter or exit a specific zone).
+Just call the script directly or via python, you will need to specify a key for authentication (use the one present in the link in the email sent to you when you enter or exit a specific zone or the parameter `s` passed to `load_coords.php` page).
 
 ```
 python bluon_dump.py --help
@@ -46,4 +46,4 @@ The script automatically save the fetched data points in a CSV with the followin
 `,id,tracker_dev_id,lat,lon,date,speed,altitude,gps_num,hdop,emergency,charging,battery,seqno,sf,timestamp`
 
 ### Images
-The script can generate some images using a `ggplot-like` library. 
+The script can generate some images using a `ggplot-like` library.
