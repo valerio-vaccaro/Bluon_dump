@@ -58,30 +58,31 @@ def main(days, csv, key, quiet, image):
         payload = {'s': key, 'offset': str(i)}
         headers = {'content-type': 'application/x-www-form-urlencoded'}
         r = requests.post('https://bluon.me/utilities/active/load_coords.php', data=payload, headers=headers)
-        dataset = r.json()[0]['last_coord']
+        if len(r.content) > 0:
+            dataset = r.json()[0]['last_coord']
 
-        if (days==0):
-            if len(dataset) == 0:
-                break
+            if (days==0):
+                if len(dataset) == 0:
+                    break
 
-        for row in dataset:
-            if not quiet:
-                print(row)
-            set['id'].append(row['id'])
-            set['tracker_dev_id'].append(row['tracker_dev_id'])
-            set['lat'].append(row['lat'])
-            set['lon'].append(row['lon'])
-            set['date'].append(row['date'])
-            set['speed'].append(row['speed'])
-            set['altitude'].append(row['altitude'])
-            set['gps_num'].append(row['gps_num'])
-            set['hdop'].append(row['hdop'])
-            set['emergency'].append(row['emergency'])
-            set['charging'].append(row['charging'])
-            set['battery'].append(row['battery'])
-            set['seqno'].append(row['seqno'])
-            set['sf'].append(row['sf'])
-            set['timestamp'].append(row['timestamp'])
+            for row in dataset:
+                if not quiet:
+                    print(row)
+                set['id'].append(row['id'])
+                set['tracker_dev_id'].append(row['tracker_dev_id'])
+                set['lat'].append(row['lat'])
+                set['lon'].append(row['lon'])
+                set['date'].append(row['date'])
+                set['speed'].append(row['speed'])
+                set['altitude'].append(row['altitude'])
+                set['gps_num'].append(row['gps_num'])
+                set['hdop'].append(row['hdop'])
+                set['emergency'].append(row['emergency'])
+                set['charging'].append(row['charging'])
+                set['battery'].append(row['battery'])
+                set['seqno'].append(row['seqno'])
+                set['sf'].append(row['sf'])
+                set['timestamp'].append(row['timestamp'])
 
     df = pd.DataFrame(set)
     df['id'] = pd.to_numeric(df.id)
